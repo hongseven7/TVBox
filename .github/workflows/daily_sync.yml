@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      SCRIPTS_DIR: .github/scripts
 
     steps:
       - name: Checkout Fork
@@ -53,16 +55,13 @@ jobs:
 
       - name: Install Dependencies
         if: env.UPDATED == 'true'
-        env:
-          SCRIPTS_DIR: ./.github/scripts
         run: |
-          if [ -f $SCRIPTS_DIR\requirements.txt ]; then pip install -r $SCRIPTS_DIR\requirements.txt; fi
-          echo "SCRIPTS_DIR=$SCRIPTS_DIR" >> $GITHUB_ENV
+          if [ -f $SCRIPTS_DIR/requirements.txt ]; then pip install -r $SCRIPTS_DIR/requirements.txt; fi
 
       - name: Run Custom Script
         if: env.UPDATED == 'true'
         run: |
-          python $env.SCRIPTS_DIR/remove_proxy.py .
+          python $SCRIPTS_DIR/remove_proxy.py .
 
       - name: Commit and Push Script Changes
         if: env.UPDATED == 'true'
