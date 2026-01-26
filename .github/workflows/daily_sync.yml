@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       force_update:
-      description: "Force update?"
-      type: boolean
-      default: false
-      required: true
+        description: 'Force update?'
+        type: boolean
+        default: false
+        required: true
 
 jobs:
   sync-and-process:
