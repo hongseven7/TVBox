@@ -20,15 +20,15 @@ def remove_proxy(input_file_path, output_file_path):
     # \1 -> The original quote captured in Group 1
     # https:// -> The new protocol
     # raw.githubusercontent -> The rest of the required string
-    new_content = re.sub(pattern, r'\1https://raw.githubusercontent', content)
+    new_content, num_changes = re.subn(pattern, r'\1https://raw.githubusercontent', content)
 
-    if (content == new_content):
+    if (num_changes == 0):
         return
 
     with open(output_file_path, 'w', encoding='utf-8') as file:
         file.write(new_content)
 
-    print(f"Success! Processed content saved to {output_file_path}")
+    print(f"Success! Processed content saved to {output_file_path} with {num_changes} changes.")
 
 def main():
     # The file extension to target
