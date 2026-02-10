@@ -37,7 +37,7 @@ def callback_md5(match):
         # Return original match if file not found
         return match.group(0)
 
-def processContent(updates, input_file_path, output_file_path):
+def processContent(input_file_path, output_file_path):
     # https://                  -> Literal start
     # [^"'\s]* -> Match 0+ chars that are NOT quotes or whitespace
     # raw\.githubusercontent... -> Your specific target ending with user name
