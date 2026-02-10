@@ -3,32 +3,36 @@ import sys
 import os
 import glob
 
-def remove_proxy(input_file_path, output_file_path):
-    # Define the pattern
-    # r'(")[^"]*raw\.githubusercontent' explanation:
-    # (") -> Capture the opening quote (Group 1)
-    # [^"]* -> Match any character that is NOT a quote (ensures we stay inside the current string)
-    # raw\.githubusercontent -> The anchor text we are looking for
-    pattern = r'(")[^"]*raw\.githubusercontent'
+def processContent(input_file_path, output_file_path):
+    # Regex explanation:
+    # https://                  -> Literal start
+    # [^"'\s]* -> Match 0+ chars that are NOT quotes or whitespace
+    # raw\.githubusercontent... -> Your specific target ending with user name
+    pattern_proxy = r"https://[^\"'\s]*raw\.githubusercontent\.com/yoursmile66"
+    replacement_proxy = r"https://raw.githubusercontent.com/hongseven7"
+    
+    pattern_jar_url = r"jihulab.com/yoursmile2/TVBox/-/raw/master"
+    replacement_jar_url = r"raw.githubusercontent.com/hongseven7/TVBox/main"
+    
+    total_changes = 0
 
     # Read the file
     with open(input_file_path, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    # Perform the replacement
-    # We replace the whole match with:
-    # \1 -> The original quote captured in Group 1
-    # https:// -> The new protocol
-    # raw.githubusercontent -> The rest of the required string
-    new_content, num_changes = re.subn(pattern, r'\1https://raw.githubusercontent', content)
+    # Perform the replacements
+    content, changes = re.subn(pattern_proxy, replacement_proxy, content)
+    total_changes += changes
+    content, changes = re.subn(pattern_jar_url, replacement_jar_url, content)
+    total_changes += changes
 
-    if (num_changes == 0):
+    if total_changes == 0:
         return
 
     with open(output_file_path, 'w', encoding='utf-8') as file:
-        file.write(new_content)
+        file.write(content)
 
-    print(f"Success! Processed content saved to {output_file_path} with {num_changes} changes.")
+    print(f"Success! Processed content saved to {output_file_path} with {total_changes} changes.")
 
 def main():
     # The file extension to target
@@ -54,7 +58,7 @@ def main():
     print(f"Found {len(files)} files in total. Start processing...\n")
 
     for file in files:
-        remove_proxy(file, file)
+        processContent(file, file)
 
     print("\nProcessing complete.")
 
