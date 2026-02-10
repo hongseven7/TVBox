@@ -2,9 +2,42 @@ import re
 import sys
 import os
 import glob
+import hashlib
 
-def processContent(input_file_path, output_file_path):
-    # Regex explanation:
+def calculate_md5(file_path):
+    if not os.path.isfile(file_path):
+        return None 
+    try:    
+        with open(file_path, "rb") as f:
+            file_hash = hashlib.md5()
+            while chunk := f.read(8192):
+                file_hash.update(chunk)
+        return file_hash.hexdigest()
+    except:
+        return None
+
+def callback_md5(match):
+    # Group 1: The leading slash '/'
+    slash = match.group(1)
+    
+    # Group 2: The filename (no slashes)
+    filename = match.group(2)
+    
+    # Group 3: The old checksum
+    old_checksum = match.group(3)
+    
+    # Calculate NEW checksum
+    new_checksum = calculate_md5(filename)
+    
+    if new_checksum and (new_checksum != old_checksum):
+        print(f"Updated: {filename} ({old_checksum} -> {new_checksum})")
+        # Reconstruct the string: Slash + Filename + ;md5; + NewHash + closing Quote
+        return f"{slash}{filename};md5;{new_checksum}\""
+    else:
+        # Return original match if file not found
+        return match.group(0)
+
+def processContent(updates, input_file_path, output_file_path):
     # https://                  -> Literal start
     # [^"'\s]* -> Match 0+ chars that are NOT quotes or whitespace
     # raw\.githubusercontent... -> Your specific target ending with user name
@@ -13,6 +46,13 @@ def processContent(input_file_path, output_file_path):
     
     pattern_jar_url = r"jihulab.com/yoursmile2/TVBox/-/raw/master"
     replacement_jar_url = r"raw.githubusercontent.com/hongseven7/TVBox/main"
+    
+    # (/):        Group 1 - Match the literal leading slash
+    # ([^/]+):    Group 2 - Match filename (1+ chars that are NOT a slash)
+    # ;md5;:      Match the literal separator
+    # ([a-f0-9]+):Group 3 - Match the hex checksum
+    # ":          Match the closing quote (consumed by regex, so we must put it back)
+    pattern_md5 = r'(/)([^/]+);md5;([a-fA-F0-9]+)"'
     
     total_changes = 0
 
@@ -24,6 +64,8 @@ def processContent(input_file_path, output_file_path):
     content, changes = re.subn(pattern_proxy, replacement_proxy, content)
     total_changes += changes
     content, changes = re.subn(pattern_jar_url, replacement_jar_url, content)
+    total_changes += changes
+    content, changes = re.subn(pattern_md5, callback_md5, content)
     total_changes += changes
 
     if total_changes == 0:
