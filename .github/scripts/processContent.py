@@ -4,7 +4,7 @@ import os
 import glob
 import hashlib
 
-def calculate_md5(file_path):
+def calculateMd5(file_path):
     if not os.path.isfile(file_path):
         return None 
     try:    
@@ -16,7 +16,7 @@ def calculate_md5(file_path):
     except:
         return None
 
-def callback_md5(match):
+def callbackMd5(match):
     # Group 1: The leading slash '/'
     slash = match.group(1)
     
@@ -27,7 +27,7 @@ def callback_md5(match):
     old_checksum = match.group(3)
     
     # Calculate NEW checksum
-    new_checksum = calculate_md5(filename)
+    new_checksum = calculateMd5(filename)
     
     if new_checksum and (new_checksum != old_checksum):
         print(f"Updated: {filename} ({old_checksum} -> {new_checksum})")
@@ -62,10 +62,13 @@ def processContent(input_file_path, output_file_path):
 
     # Perform the replacements
     content, changes = re.subn(pattern_proxy, replacement_proxy, content)
+    print(f"Changed {changes} lines with proxy.")
     total_changes += changes
     content, changes = re.subn(pattern_jar_url, replacement_jar_url, content)
+    print(f"Changed {changes} lines with jar URL.")
     total_changes += changes
-    content, changes = re.subn(pattern_md5, callback_md5, content)
+    content, changes = re.subn(pattern_md5, callbackMd5, content)
+    print(f"Changed {changes} lines with MD5 checksum.")
     total_changes += changes
 
     if total_changes == 0:
