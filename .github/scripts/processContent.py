@@ -47,7 +47,7 @@ def processContent(input_file_path, output_file_path):
     pattern_username = r"yoursmile66"
     replacement_username = r"hongseven7"
     
-    pattern_jar_url = r"jihulab.com/yoursmile3/TVBox/-/raw/master"
+    pattern_jar_url = r"jihulab.com/yoursmile3/TVBox/-/raw/main"
     replacement_jar_url = r"raw.githubusercontent.com/hongseven7/TVBox/main"
     
     # (/):        Group 1 - Match the literal leading slash
