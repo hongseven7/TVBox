@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout Fork
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: main
           fetch-depth: 0
@@ -65,14 +65,14 @@ jobs:
       - name: Download External File
         if: env.HAS_CHANGES == 'true'
         run: |
-          FILE_URL="https://jihulab.com/yoursmile2/TVBox/-/raw/master/custom_spider.jar"
+          FILE_URL="https://jihulab.com/yoursmile3/TVBox/-/raw/main/custom_spider.jar"
           
           echo "Downloading $FILE_URL"
           curl -O --output-dir . "$FILE_URL"
 
       - name: Set up Python
         if: env.HAS_CHANGES == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
 

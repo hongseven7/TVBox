@@ -47,6 +47,7 @@ def processContent(input_file_path, output_file_path):
     pattern_username = r"yoursmile66"
     replacement_username = r"hongseven7"
     
+    # Also need to update this URL in syncAndProcess.yml
     pattern_jar_url = r"jihulab.com/yoursmile3/TVBox/-/raw/main"
     replacement_jar_url = r"raw.githubusercontent.com/hongseven7/TVBox/main"
     
