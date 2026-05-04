@@ -41,10 +41,13 @@ def processContent(input_file_path, output_file_path):
     # https://                  -> Literal start
     # [^"'\s]* -> Match 0+ chars that are NOT quotes or whitespace
     # raw\.githubusercontent... -> Your specific target ending with user name
-    pattern_proxy = r"https://[^\"'\s]*raw\.githubusercontent\.com/yoursmile66"
-    replacement_proxy = r"https://raw.githubusercontent.com/hongseven7"
+    pattern_proxy = r"https://[^\"'\s]*raw\.githubusercontent\.com"
+    replacement_proxy = r"https://raw.githubusercontent.com"
     
-    pattern_jar_url = r"jihulab.com/yoursmile2/TVBox/-/raw/master"
+    pattern_username = r"yoursmile66"
+    replacement_username = r"hongseven7"
+    
+    pattern_jar_url = r"jihulab.com/yoursmile3/TVBox/-/raw/master"
     replacement_jar_url = r"raw.githubusercontent.com/hongseven7/TVBox/main"
     
     # (/):        Group 1 - Match the literal leading slash
@@ -63,6 +66,9 @@ def processContent(input_file_path, output_file_path):
     # Perform the replacements
     content, changes = re.subn(pattern_proxy, replacement_proxy, content)
     print(f"Changed {changes} lines with proxy.")
+    total_changes += changes
+    content, changes = re.subn(pattern_username, replacement_username, content)
+    print(f"Changed {changes} lines with user name.")
     total_changes += changes
     content, changes = re.subn(pattern_jar_url, replacement_jar_url, content)
     print(f"Changed {changes} lines with jar URL.")
