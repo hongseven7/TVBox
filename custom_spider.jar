@@ -3,7 +3,7 @@
 <head>
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <title>拒绝访问</title>
-<script nonce="N1yBj+7ISAl4gT5KAYCoGA==">
+<script nonce="JiKoUNMD8iQTEnFUCc91hA==">
 //<![CDATA[
 const root = document.documentElement;
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -53,7 +53,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 </div>
 
 </div>
-<script nonce="N1yBj+7ISAl4gT5KAYCoGA==">
+<script nonce="JiKoUNMD8iQTEnFUCc91hA==">
 //<![CDATA[
 (function(){
   var goBackElement = document.querySelector('.js-go-back');
