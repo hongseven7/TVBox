@@ -3,7 +3,7 @@
 <head>
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <title>拒绝访问</title>
-<script nonce="xcI4CDIQu+KazGPz5UJA2g==">
+<script nonce="x50U9S+rFfx3UZl1rLgR2A==">
 //<![CDATA[
 const root = document.documentElement;
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -21,9 +21,9 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 //]]>
 </script>
 <link rel="stylesheet" href="/assets/errors-cc438031220058b8f0e7ca33ccb63608311320e60955743e55ba38f07db1400a.css" />
-<link rel="stylesheet" href="/assets/application-82e52fd29fd39392d44be77450d2a5d46c3bad614e189622b2407df9c2835ffe.css" />
+<link rel="stylesheet" href="/assets/application-b881c701cde5a10f36d04ce729a8eb3a4643e888d67660b6e93c5f46d2f733cf.css" />
 <link rel="stylesheet" href="/assets/fonts-deb7ad1d55ca77c0172d8538d53442af63604ff490c74acc2859db295c125bdb.css" />
-<link rel="stylesheet" href="/assets/tailwind-5434fd326f21ad12d9f1a25a072c52a82bf7dfe81abbaf171183b3582eaadf23.css" />
+<link rel="stylesheet" href="/assets/tailwind-f2b3f987bf3146205e9de3e60b4941fa15d8bb92aa378ea1f421e9fa284b5a47.css" />
 </head>
 <body>
 <div class="page-container">
@@ -53,7 +53,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 </div>
 
 </div>
-<script nonce="xcI4CDIQu+KazGPz5UJA2g==">
+<script nonce="x50U9S+rFfx3UZl1rLgR2A==">
 //<![CDATA[
 (function(){
   var goBackElement = document.querySelector('.js-go-back');
